@@ -49,7 +49,7 @@
 			<ul id="scene" data-invert-x="false" data-invert-y="false" data-scalar-x="7" data-scalar-y="7"
 				data-friction-x="0.1" data-friction-y="0.1" data-origin-x="0.5" data-origin-y="0.5">
 				<li class="layer name" data-depth="0.90">Reservations</li>
-				<li class="layer btn btn-main" data-depth="0.30"><a th:href="@{/your-reservations}" class="res-btn">Your
+				<li class="layer btn btn-main" data-depth="0.30"> <a th:href="@{/your-reservations}" class="res-btn">Your
 						Reservations</a> <br> <a th:href="@{/}" class="back-btn">Back
 						Home</a></li>
 			</ul>
@@ -67,6 +67,11 @@
 			<form id="resForm" name="resForm" th:action="@{/proceed-reservation}" th:object="${newRes}" method="POST">
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 				
+			   <div class="form-group">
+					<label>Hotel Name</label> <input class="form-control prc" id="hotel-name" th:field="*{hotelName}" disabled="disabled"/>
+					<input type="hidden" name="hotelName" th:value="*{hotelName}" />
+				</div>
+				
 				<div class="form-group">
 				
 					<!-- Room Type -->
@@ -83,7 +88,7 @@
 							Suite</option>
 					</select>
 				</div>
-
+				
 				<!-- Period of Stay -->
 				<div class="form-group">
 					<label>Period of Stay</label> <input class="form-control prc" id="stay-per" th:field="*{stayPeriod}"

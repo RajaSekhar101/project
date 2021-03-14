@@ -11,6 +11,9 @@ public class CurrentReservation {
 	
 	// temp class to filter data and get it from controller to database using services
 	//  current reservation fields and annotate to get the required data
+	@NotNull(message = "is required")
+	@Size(min = 1, message = "is required")
+	private String hotelName;
 	
 	@NotNull(message = "is required")
 	@Size(min = 1, message = "is required")
@@ -58,7 +61,8 @@ public class CurrentReservation {
 	public CurrentReservation() {
 	}
 
-	public CurrentReservation(@NotNull(message = "is required") @Size(min = 1, message = "is required") int id,
+	public CurrentReservation(@NotNull(message = "is required") @Size(min = 1, message = "is required") String hotelName,
+			@NotNull(message = "is required") @Size(min = 1, message = "is required") int id,
 			@NotNull(message = "is required") @Size(min = 1, message = "is required") int stayPeriod,
 			@NotNull(message = "is required") @Size(min = 1, message = "is required") String room,
 			@NotNull(message = "is required") @Size(min = 1, message = "is required") int price,
@@ -69,6 +73,7 @@ public class CurrentReservation {
 			@NotNull(message = "is required") @Size(min = 1, message = "is required") Date arrivalDate,
 			@NotNull(message = "is required") @Size(min = 1, message = "is required") int usertId) {
 		super();
+		this.hotelName=hotelName;
 		this.id = id;
 		this.stayPeriod = stayPeriod;
 		this.room = room;
@@ -80,8 +85,16 @@ public class CurrentReservation {
 		this.arrivalDate = arrivalDate;
 		this.usertId = usertId;
 	}
+
 	
-	// current reservation getters and setters fields
+
+	public String getHotelName() {
+		return hotelName;
+	}
+
+	public void setHotelName(String hotelName) {
+		this.hotelName = hotelName;
+	}
 
 	public int getId() {
 		return id;
@@ -163,13 +176,15 @@ public class CurrentReservation {
 		this.usertId = usertId;
 	}
 
-	// override to string method to contain all fields
-
 	@Override
 	public String toString() {
-		return "CurrentReservation [id=" + id + ", stayPeriod=" + stayPeriod + ", room=" + room + ", price=" + price
-				+ ", rooms=" + rooms + ", persons=" + persons + ", children=" + children + ", openBuffet="
-				+ openBuffet + ", arrivalDate=" + arrivalDate + ", usertId=" + usertId + "]";
+		return "CurrentReservation [hotelName=" + hotelName + ", id=" + id + ", stayPeriod=" + stayPeriod + ", room="
+				+ room + ", price=" + price + ", rooms=" + rooms + ", persons=" + persons + ", children=" + children
+				+ ", openBuffet=" + openBuffet + ", arrivalDate=" + arrivalDate + ", usertId=" + usertId + "]";
 	}
+	
+	// current reservation getters and setters fields
+
+	
 
 }

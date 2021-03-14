@@ -20,6 +20,9 @@ public class Reservation {
 	@Column(name = "reservation_id")
 	private int id;
 
+	@Column(name = "hotel_Name")
+	private String hotelName;
+	
 	@Column(name = "reservation_room")
 	private String room;
 
@@ -53,8 +56,12 @@ public class Reservation {
 	public Reservation() {
 	}
 
-	public Reservation(String room, int price, int rooms, int persons, int children, String openBuffet,
-			Date arrivalDate, int stayDays, int userId) {
+
+	public Reservation(int id, String hotelName, String room, int price, int rooms, int persons, int children,
+			String openBuffet, Date arrivalDate, int stayDays, int userId) {
+		super();
+		this.id = id;
+		this.hotelName = hotelName;
 		this.room = room;
 		this.price = price;
 		this.rooms = rooms;
@@ -65,96 +72,125 @@ public class Reservation {
 		this.stayDays = stayDays;
 		this.userId = userId;
 	}
-	
-	// reservation getters and setters fields
-	
+
+
 	public int getId() {
 		return id;
 	}
+
 
 	public void setId(int id) {
 		this.id = id;
 	}
 
+
+	public String getHotelName() {
+		return hotelName;
+	}
+
+
+	public void setHotelName(String hotelName) {
+		this.hotelName = hotelName;
+	}
+
+
 	public String getRoom() {
 		return room;
 	}
+
 
 	public void setRoom(String room) {
 		this.room = room;
 	}
 
+
 	public int getPrice() {
 		return price;
 	}
+
 
 	public void setPrice(int price) {
 		this.price = price;
 	}
 
+
 	public int getRooms() {
 		return rooms;
 	}
+
 
 	public void setRooms(int rooms) {
 		this.rooms = rooms;
 	}
 
+
 	public int getPersons() {
 		return persons;
 	}
+
 
 	public void setPersons(int persons) {
 		this.persons = persons;
 	}
 
+
 	public int getChildren() {
 		return children;
 	}
+
 
 	public void setChildren(int children) {
 		this.children = children;
 	}
 
+
 	public String getOpenBuffet() {
 		return openBuffet;
 	}
+
 
 	public void setOpenBuffet(String openBuffet) {
 		this.openBuffet = openBuffet;
 	}
 
+
 	public Date getArrivalDate() {
 		return arrivalDate;
 	}
+
 
 	public void setArrivalDate(Date arrivalDate) {
 		this.arrivalDate = arrivalDate;
 	}
 
+
 	public int getStayDays() {
 		return stayDays;
 	}
+
 
 	public void setStayDays(int stayDays) {
 		this.stayDays = stayDays;
 	}
 
+
 	public int getUserId() {
 		return userId;
 	}
 
+
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	
-	// override to string method to contain all fields
-	
+
+
 	@Override
 	public String toString() {
-		return "Reservation [id=" + id + ", room=" + room + ", price=" + price + ", rooms=" + rooms + ", persons="
-				+ persons + ", children=" + children + ", openBuffet=" + openBuffet + ", arrivalDate=" + arrivalDate
-				+ ", stayDays=" + stayDays + ", userId=" + userId + "]";
+		return "Reservation [id=" + id + ", hotelName=" + hotelName + ", room=" + room + ", price=" + price + ", rooms="
+				+ rooms + ", persons=" + persons + ", children=" + children + ", openBuffet=" + openBuffet
+				+ ", arrivalDate=" + arrivalDate + ", stayDays=" + stayDays + ", userId=" + userId + "]";
 	}
+
+	
 
 }

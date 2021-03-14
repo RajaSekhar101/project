@@ -50,7 +50,7 @@ public class ReservationServiceImpl implements ReservationService {
 
 		// get required id user using user services
 		reservation.setUserId(userService.getLoggedUserId());
-
+		reservation.setHotelName(currentReservation.getHotelName());
 		reservation.setArrivalDate(currentReservation.getArrivalDate());
 		reservation.setOpenBuffet(currentReservation.getOpenBuffet());
 		reservation.setStayDays(currentReservation.getStayPeriod());

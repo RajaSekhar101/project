@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -22,6 +23,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.zensar.hotel.entity.Hotel;
+import com.zensar.hotel.services.HotelService;
 import com.zensar.hotel.services.ReservationService;
 import com.zensar.hotel.services.UserService;
 import com.zensar.hotel.temp.CurrentReservation;
@@ -34,10 +37,13 @@ public class HotelReservationController {
 
 	private ReservationService reservationService;
 	
+	private HotelService hotelService;
+	
 	@Autowired
-	public HotelReservationController(UserService userService, ReservationService reservationService) {
+	public HotelReservationController(UserService userService, ReservationService reservationService,HotelService hotelService) {
 		this.userService = userService;
 		this.reservationService = reservationService;
+		this.hotelService = hotelService;
 	}
 
 	// data binder
@@ -91,16 +97,26 @@ public class HotelReservationController {
 
 	}
 	
+	// booking page
 	@RequestMapping("/book-room")
 	public String bookRoom() {
 		return "book";
 	}
 
-	// booking page
+	
 	@GetMapping("/new-reservation")
 	public String newReservation(Model model) {
 		// reservation attribute
-		model.addAttribute("newRes", new CurrentReservation());
+
+		/*
+		 * Hotel hotelById = hotelService.getHotelById(hotelId); if (null == hotelById)
+		 * { return "error"; }
+		 */
+		CurrentReservation currentReservation = new CurrentReservation();
+
+		//currentReservation.setHotelName(hotelById.getName());
+
+		model.addAttribute("newRes", currentReservation);
 
 		return "reservation-page";
 	}
@@ -127,14 +143,16 @@ public class HotelReservationController {
 	}
 	
 	// update reservation
-	@PostMapping("/reservation-update")
-	public String updateReservation(@RequestParam("resId") int resId, Model model) {
-		
-		// new update reservation sent to services to store it in database
-		model.addAttribute("newRes", reservationService.reservationToCurrentReservationById(resId));
-		
-		return "reservation-page";
-	}
+	/*
+	 * @PostMapping("/reservation-update") public String
+	 * updateReservation(@RequestParam("resId") int resId, Model model) {
+	 * 
+	 * // new update reservation sent to services to store it in database
+	 * model.addAttribute("newRes",
+	 * reservationService.reservationToCurrentReservationById(resId));
+	 * 
+	 * return "reservation-page"; }
+	 */
 	
 
 	// delete reservation
