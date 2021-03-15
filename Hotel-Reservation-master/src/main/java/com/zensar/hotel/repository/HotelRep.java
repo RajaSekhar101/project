@@ -8,6 +8,6 @@ import com.zensar.hotel.entity.Hotel;
 @Repository
 public interface HotelRep extends JpaRepository<Hotel, Integer> {
 
-	Hotel findById(int hotelId);
+	Hotel findByhotelId(int hotelId);
 
 }

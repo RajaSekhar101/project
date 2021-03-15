@@ -20,7 +20,7 @@ public class Reservation {
 	@Column(name = "reservation_id")
 	private int id;
 
-	@Column(name = "hotel_Name")
+	
 	private String hotelName;
 	
 	@Column(name = "reservation_room")

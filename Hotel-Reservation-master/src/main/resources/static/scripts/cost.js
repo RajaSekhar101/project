@@ -7,21 +7,21 @@ $('.form-group').on('input', '.prc', function () {
 
   $('.form-group .prc').each(function () {
     var inputVal = $(this).val();
-
+   // var totalPrice = parseInt($('#hotel-price').val(),10);
     if (inputVal.includes("Single")) {
-      totalPrice = 200;
+      totalPrice = parseInt($('#hotel-price').val(),10);
     }
 
     if (inputVal.includes("Double")) {
-      totalPrice = 300;
+      totalPrice = parseInt($('#hotel-price').val(),10)+300;
     }
 
     if (inputVal.includes("Family")) {
-      totalPrice = 400;
+      totalPrice = parseInt($('#hotel-price').val(),10)+400;
     }
 
     if (inputVal.includes("Honeymoon")) {
-      totalPrice = 500;
+      totalPrice = parseInt($('#hotel-price').val(),10)+500;
     }
 
     if (inputVal.includes("Suite")) {
@@ -37,19 +37,20 @@ $('.form-group').on('input', '.prc', function () {
     }
 
     if ($.isNumeric(inputVal)) {
-      if (counter == 1) {
+    	
+      if (counter == 3) {
         totalPrice += (inputVal * 80);
       }
 
-      if (counter == 2) {
+      if (counter == 4) {
         totalPrice += (inputVal * 400);
       }
 
-      if (counter == 3) {
+      if (counter == 5) {
         totalPrice += (inputVal * 60);
       }
 
-      if (counter == 4) {
+      if (counter == 6) {
         totalPrice += (inputVal * 10);
       }
     }

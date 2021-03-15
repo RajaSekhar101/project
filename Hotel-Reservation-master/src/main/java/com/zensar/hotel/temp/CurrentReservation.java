@@ -55,6 +55,10 @@ public class CurrentReservation {
 	@NotNull(message = "is required")
 	@Size(min = 1, message = "is required")
 	private int usertId;
+	
+	@NotNull(message = "is required")
+	@Size(min = 1, message = "is required")
+	private int hotelPrice;
 
 	// current reservation super and fields constructors
 
@@ -71,7 +75,8 @@ public class CurrentReservation {
 			@NotNull(message = "is required") @Size(min = 1, message = "is required") int children,
 			@NotNull(message = "is required") @Size(min = 1, message = "is required") String openBuffet,
 			@NotNull(message = "is required") @Size(min = 1, message = "is required") Date arrivalDate,
-			@NotNull(message = "is required") @Size(min = 1, message = "is required") int usertId) {
+			@NotNull(message = "is required") @Size(min = 1, message = "is required") int usertId,
+			@NotNull(message = "is required") @Size(min = 1, message = "is required") int hotelPrice) {
 		super();
 		this.hotelName=hotelName;
 		this.id = id;
@@ -84,9 +89,8 @@ public class CurrentReservation {
 		this.openBuffet = openBuffet;
 		this.arrivalDate = arrivalDate;
 		this.usertId = usertId;
+		this.hotelPrice=hotelPrice;
 	}
-
-	
 
 	public String getHotelName() {
 		return hotelName;
@@ -176,14 +180,23 @@ public class CurrentReservation {
 		this.usertId = usertId;
 	}
 
+	public int getHotelPrice() {
+		return hotelPrice;
+	}
+
+	public void setHotelPrice(int hotelPrice) {
+		this.hotelPrice = hotelPrice;
+	}
+
 	@Override
 	public String toString() {
 		return "CurrentReservation [hotelName=" + hotelName + ", id=" + id + ", stayPeriod=" + stayPeriod + ", room="
 				+ room + ", price=" + price + ", rooms=" + rooms + ", persons=" + persons + ", children=" + children
-				+ ", openBuffet=" + openBuffet + ", arrivalDate=" + arrivalDate + ", usertId=" + usertId + "]";
+				+ ", openBuffet=" + openBuffet + ", arrivalDate=" + arrivalDate + ", usertId=" + usertId
+				+ ", hotelPrice=" + hotelPrice + "]";
 	}
+
 	
-	// current reservation getters and setters fields
 
 	
 

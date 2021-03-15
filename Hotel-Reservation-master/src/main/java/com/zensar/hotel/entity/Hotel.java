@@ -1,71 +1,133 @@
 package com.zensar.hotel.entity;
 
-import javax.persistence.Column;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+
 
 @Entity
 @Table(name = "`hotel`")
 public class Hotel {
 
-	// reservation fields and annotate with it's column to connect to jpa entity
-	// manager
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "hotel_id")
-	private int id;
+	private int hotelId;
+	private String hotelName;
+	private String hotelDesc;
+	private String hotelLocation;
+	private String hotelCategory;
+	private int hotelPrice;
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "hotelId")
+	@Fetch(FetchMode.JOIN)
+	private Set<Image> images;
 
-	@Column(name = "hotel_price")
-	private int price;
 	
-	@Column(name = "hotel_name")
-	private String name;
-
-	// reservation super and fields constructors
-
 	public Hotel() {
-	}
-
-	public Hotel(int id, int price, String name) {
 		super();
-		this.id = id;
-		this.price = price;
-		this.name = name;
 	}
 
-	public int getId() {
-		return id;
+
+	public Hotel(int hotelId, String hotelName, String hotelDesc, String hotelLocation, String hotelCategory,
+			int hotelPrice, Set<Image> images) {
+		super();
+		this.hotelId = hotelId;
+		this.hotelName = hotelName;
+		this.hotelDesc = hotelDesc;
+		this.hotelLocation = hotelLocation;
+		this.hotelCategory = hotelCategory;
+		this.hotelPrice = hotelPrice;
+		this.images = images;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+
+	public int getHotelId() {
+		return hotelId;
 	}
 
-	public int getPrice() {
-		return price;
+
+	public void setHotelId(int hotelId) {
+		this.hotelId = hotelId;
 	}
 
-	public void setPrice(int price) {
-		this.price = price;
+
+	public String getHotelName() {
+		return hotelName;
 	}
 
-	public String getName() {
-		return name;
+
+	public void setHotelName(String hotelName) {
+		this.hotelName = hotelName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+
+	public String getHotelDesc() {
+		return hotelDesc;
 	}
+
+
+	public void setHotelDesc(String hotelDesc) {
+		this.hotelDesc = hotelDesc;
+	}
+
+
+	public String getHotelLocation() {
+		return hotelLocation;
+	}
+
+
+	public void setHotelLocation(String hotelLocation) {
+		this.hotelLocation = hotelLocation;
+	}
+
+
+	public String getHotelCategory() {
+		return hotelCategory;
+	}
+
+
+	public void setHotelCategory(String hotelCategory) {
+		this.hotelCategory = hotelCategory;
+	}
+
+
+	public int getHotelPrice() {
+		return hotelPrice;
+	}
+
+
+	public void setHotelPrice(int hotelPrice) {
+		this.hotelPrice = hotelPrice;
+	}
+
+
+	public Set<Image> getImages() {
+		return images;
+	}
+
+
+	public void setImages(Set<Image> images) {
+		this.images = images;
+	}
+
 
 	@Override
 	public String toString() {
-		return "Hotel [id=" + id + ", price=" + price + ", name=" + name + "]";
+		return "Hotel [hotelId=" + hotelId + ", hotelName=" + hotelName + ", hotelDesc=" + hotelDesc
+				+ ", hotelLocation=" + hotelLocation + ", hotelCategory=" + hotelCategory + ", hotelPrice=" + hotelPrice
+				+ ", images=" + images + "]";
 	}
 
 	
-
 }

@@ -73,6 +73,11 @@
 				</div>
 				
 				<div class="form-group">
+					<label>Hotel Price</label> <input class="form-control prc"  th:field="*{hotelPrice}" disabled="disabled"/>
+					<input type="hidden" id="hotel-price" name="hotelPrice"  th:value="*{hotelPrice}" />
+				</div>
+				
+				<div class="form-group">
 				
 					<!-- Room Type -->
 					<input type="hidden" th:field="*{id}" /> <label>Room/SuiteType</label>
@@ -139,7 +144,7 @@
 				<!-- Live price count -->
 				<div class="form-group">
 					<div class="price-lab">
-						TOTAL: <label><output class="price-fi" id="price-count"></output></label>$
+						TOTAL: <label><output class="price-fi" id="price-count"></output></label>Rs
 					</div>
 				</div>
 

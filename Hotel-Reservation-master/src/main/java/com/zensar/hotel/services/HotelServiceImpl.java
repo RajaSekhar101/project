@@ -24,7 +24,8 @@ public class HotelServiceImpl implements HotelService {
 	@Override
 	@Transactional
 	public Hotel getHotelById(int hotelId) {
-		return hotelRepo.findById(hotelId);
+		
+		return hotelRepo.findByhotelId(hotelId);
 	}
 
 }

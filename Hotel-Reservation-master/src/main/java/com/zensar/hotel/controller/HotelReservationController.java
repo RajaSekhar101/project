@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -105,16 +104,19 @@ public class HotelReservationController {
 
 	
 	@GetMapping("/new-reservation")
-	public String newReservation(Model model) {
+	public String newReservation(Model model,@RequestParam("hotelId")int hotelId) {
 		// reservation attribute
 
-		/*
-		 * Hotel hotelById = hotelService.getHotelById(hotelId); if (null == hotelById)
-		 * { return "error"; }
-		 */
+		
+		  Hotel hotelById = hotelService.getHotelById(hotelId); 
+		  if (null == hotelById){ 
+			  return "error"; 
+			  }
+		 
 		CurrentReservation currentReservation = new CurrentReservation();
 
-		//currentReservation.setHotelName(hotelById.getName());
+		currentReservation.setHotelName(hotelById.getHotelName());
+		currentReservation.setHotelPrice(hotelById.getHotelPrice());
 
 		model.addAttribute("newRes", currentReservation);
 
