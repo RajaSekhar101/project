@@ -13,4 +13,7 @@ public interface UserService extends UserDetailsService {
 	public void saveUser(CurrentUser currentUser);
 
 	public int getLoggedUserId();
+
+	public User getLoggedUser();
+
 }

@@ -73,6 +73,13 @@ public class UserServiceImpl implements UserService {
 		User user = userRepository.findByUsername(loggedUserEmail());
 		return user.getId();
 	}
+	
+	@Override
+	@Transactional
+	public User getLoggedUser() {
+		User user = userRepository.findByUsername(loggedUserEmail());
+		return user;
+	}
 
 	// security login check valid username and role
 	@Override
@@ -102,5 +109,7 @@ public class UserServiceImpl implements UserService {
 
 		return principal.toString();
 	}
+
+	
 
 }

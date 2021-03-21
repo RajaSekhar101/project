@@ -10,4 +10,5 @@ public interface HotelRep extends JpaRepository<Hotel, Integer> {
 
 	Hotel findByhotelId(int hotelId);
 
+	
 }

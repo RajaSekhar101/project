@@ -76,6 +76,7 @@
 					<th>Stay Period</th>
 					<th>Arrival Date</th>
 					<th>Total Price</th>
+					<th>Status</th>
 					<th>Action</th>
 
 				</tr>
@@ -95,29 +96,20 @@
 					<td style="text-align: center; vertical-align: middle;" th:text="${tempRes.arrivalDate}"
 						id="arr_str" />
 					<td style="text-align: center; vertical-align: middle;" th:text="${tempRes.price}" />
+					<td style="text-align: center; vertical-align: middle;" th:text="${tempRes.status}" />
 					<td>
-						<!-- Update and Delete buttons -->
-						<!-- <div class="rows">
-							<div class="col-small">
+		
+
+							<div class="col-small" th:if="${tempRes.status == 'Active'}">
 								<form th:action="@{/reservation-update}" method="POST">
 									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 								
 									<input type="hidden" name="resId" th:value="${tempRes.id}" />
-									<button type="submit" class="btn btn-info btn-lg">Update</button>
-								</form>
-							</div> -->
-
-							<div class="col-small">
-								<form th:action="@{/reservation-delete}" method="POST">
-									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-								
-									<input type="hidden" name="resId" th:value="${tempRes.id}" />
 									<button type="submit" class="btn btn-danger btn-lg"
-										onclick="if (!(confirm('Are you sure you want to delete this Reservation?'))) return false">
-										Delete</button>
+										onclick="if (!(confirm('Are you sure you want to request  this Reservation to cancellation?'))) return false">
+										RequestCancel</button>
 								</form>
 							</div>
-						</div>
 					</td>
 				</tr>
 			</tbody>

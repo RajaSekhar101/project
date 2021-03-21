@@ -49,6 +49,10 @@ public class Reservation {
 
 	@Column(name = "reservation_user_id")
 	private int userId;
+	
+	
+	@Column(name = "reservation_status")
+	private String status;
 
 	
 	// reservation super and fields constructors
@@ -58,7 +62,7 @@ public class Reservation {
 
 
 	public Reservation(int id, String hotelName, String room, int price, int rooms, int persons, int children,
-			String openBuffet, Date arrivalDate, int stayDays, int userId) {
+			String openBuffet, Date arrivalDate, int stayDays, int userId, String status) {
 		super();
 		this.id = id;
 		this.hotelName = hotelName;
@@ -71,6 +75,7 @@ public class Reservation {
 		this.arrivalDate = arrivalDate;
 		this.stayDays = stayDays;
 		this.userId = userId;
+		this.status = status;
 	}
 
 
@@ -184,13 +189,26 @@ public class Reservation {
 	}
 
 
+	public String getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Reservation [id=" + id + ", hotelName=" + hotelName + ", room=" + room + ", price=" + price + ", rooms="
 				+ rooms + ", persons=" + persons + ", children=" + children + ", openBuffet=" + openBuffet
-				+ ", arrivalDate=" + arrivalDate + ", stayDays=" + stayDays + ", userId=" + userId + "]";
+				+ ", arrivalDate=" + arrivalDate + ", stayDays=" + stayDays + ", userId=" + userId + ", status="
+				+ status + "]";
 	}
 
+
+	
 	
 
 }

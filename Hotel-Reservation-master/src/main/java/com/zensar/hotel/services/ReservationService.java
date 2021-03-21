@@ -17,5 +17,12 @@ public interface ReservationService {
 	public void deleteReservation(int resId);
 
 	public CurrentReservation reservationToCurrentReservationById(int resId);
+	
+	public Collection<Reservation> getAllReservations();
 
+	public void setStatus(Reservation user);
+	
+	
+
+	
 }

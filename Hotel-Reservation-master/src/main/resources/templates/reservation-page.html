@@ -34,12 +34,7 @@
 					</a>
 				</div>
 
-				<!-- Menu bar -->
-				<ul class="menu">
-					<li><a href="#home">Reservations</a></li>
-					<li><a href="#book">Booking</a></li>
-					<li><a href="#footer">About Me</a></li>
-				</ul>
+			
 			</nav>
 			<div class="menu-trigger js-menu-trigger"></div>
 		</header>
@@ -49,8 +44,7 @@
 			<ul id="scene" data-invert-x="false" data-invert-y="false" data-scalar-x="7" data-scalar-y="7"
 				data-friction-x="0.1" data-friction-y="0.1" data-origin-x="0.5" data-origin-y="0.5">
 				<li class="layer name" data-depth="0.90">Reservations</li>
-				<li class="layer btn btn-main" data-depth="0.30"> <a th:href="@{/your-reservations}" class="res-btn">Your
-						Reservations</a> <br> <a th:href="@{/}" class="back-btn">Back
+				<li class="layer btn btn-main" data-depth="0.30"> <br> <a th:href="@{/}" class="back-btn">Back
 						Home</a></li>
 			</ul>
 		</div>
@@ -58,9 +52,9 @@
 
 	<!-- Hotel Booking Section -->
 	<div class="container">
-		<h2 class="sub-title" id="book">Hotel Booking</h2>
+		<h2 class="sub-title" id="book">Hotel</h2>
 		<div class="hotel_reserve_box card">
-			<h3>Booking Form</h3>
+			<h3>creating Form</h3>
 			<br>
 
 			<!-- Reservation form -->
@@ -139,6 +133,10 @@
 				<!-- hidden field to pass next live price value in this label to complete reservation -->
 				<div class="form-group">
 					<input type="hidden" id="priceField" value="" th:field="*{price}" />
+				</div>
+				
+				<div class="form-group">
+					<input type="hidden" id="status" value="" th:field="*{status}" />
 				</div>
 
 				<!-- Live price count -->

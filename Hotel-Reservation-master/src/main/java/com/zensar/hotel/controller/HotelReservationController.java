@@ -1,5 +1,7 @@
 package com.zensar.hotel.controller;
 
+import java.util.Collection;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -23,6 +25,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.zensar.hotel.entity.Hotel;
+import com.zensar.hotel.entity.Reservation;
+import com.zensar.hotel.entity.Role;
 import com.zensar.hotel.services.HotelService;
 import com.zensar.hotel.services.ReservationService;
 import com.zensar.hotel.services.UserService;
@@ -35,11 +39,15 @@ public class HotelReservationController {
 	private UserService userService;
 
 	private ReservationService reservationService;
-	
+
 	private HotelService hotelService;
-	
+
 	@Autowired
-	public HotelReservationController(UserService userService, ReservationService reservationService,HotelService hotelService) {
+	private HttpServletResponse response;
+
+	@Autowired
+	public HotelReservationController(UserService userService, ReservationService reservationService,
+			HotelService hotelService) {
 		this.userService = userService;
 		this.reservationService = reservationService;
 		this.hotelService = hotelService;
@@ -54,9 +62,19 @@ public class HotelReservationController {
 
 	// home page
 	@RequestMapping("/")
-	public String homePage() {
+	public String homePage(Model model) {
 
+		model.addAttribute("isUserAdmin", isAdmin(userService.getLoggedUser().getRoles()));
 		return "home-page";
+	}
+
+	private Boolean isAdmin(Collection<Role> roles) {
+		for (Role value : roles) {
+			if (value.getName().equals("ROLE_ADMIN")) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	// login page
@@ -68,7 +86,7 @@ public class HotelReservationController {
 		if (!(auth instanceof AnonymousAuthenticationToken)) {
 			return "redirect:/";
 		}
-		
+
 		// new user attribute for sign up page
 		model.addAttribute("newUser", new CurrentUser());
 
@@ -95,28 +113,30 @@ public class HotelReservationController {
 		return "redirect:/login-form-page";
 
 	}
-	
+
 	// booking page
 	@RequestMapping("/book-room")
-	public String bookRoom() {
+	public String bookRoom(Model model) {
+
+		model.addAttribute("allHotels", hotelService.getAllHotels());
+
 		return "book";
 	}
 
-	
-	@GetMapping("/new-reservation")
-	public String newReservation(Model model,@RequestParam("hotelId")int hotelId) {
+	@RequestMapping(value = "/new-reservation", method = RequestMethod.POST)
+	public String newReservation(Model model, @RequestParam("hotelId") int hotelId) {
 		// reservation attribute
 
-		
-		  Hotel hotelById = hotelService.getHotelById(hotelId); 
-		  if (null == hotelById){ 
-			  return "error"; 
-			  }
-		 
+		Hotel hotelById = hotelService.getHotelById(hotelId);
+		if (null == hotelById) {
+			return "error";
+		}
+
 		CurrentReservation currentReservation = new CurrentReservation();
 
 		currentReservation.setHotelName(hotelById.getHotelName());
 		currentReservation.setHotelPrice(hotelById.getHotelPrice());
+		currentReservation.setStatus("Active");
 
 		model.addAttribute("newRes", currentReservation);
 
@@ -127,7 +147,7 @@ public class HotelReservationController {
 	@PostMapping("/proceed-reservation")
 	public String proceedReservation(@Valid @ModelAttribute("newRes") CurrentReservation currentReservation,
 			BindingResult theBindingResult, Model model) {
-		
+
 		// send reservation to services to save it in database
 		reservationService.saveOrUpdateReservation(currentReservation);
 
@@ -137,41 +157,28 @@ public class HotelReservationController {
 	// reservations of user
 	@GetMapping("/your-reservations")
 	public String reservationsList(Model model) {
-		
+
 		// list of reservations for logged user
 		model.addAttribute("resList", reservationService.getReservationsForLoggedUser());
 
 		return "your-reservations";
 	}
-	
-	// update reservation
-	/*
-	 * @PostMapping("/reservation-update") public String
-	 * updateReservation(@RequestParam("resId") int resId, Model model) {
-	 * 
-	 * // new update reservation sent to services to store it in database
-	 * model.addAttribute("newRes",
-	 * reservationService.reservationToCurrentReservationById(resId));
-	 * 
-	 * return "reservation-page"; }
-	 */
-	
 
-	// delete reservation
-	@PostMapping("/reservation-delete")
-	public String deleteReservation(@RequestParam("resId") int resId) {
-		
-		// delete reservation sent to services to delete from database 
-		reservationService.deleteReservation(resId);
-		
+	// update reservation
+	@PostMapping("/reservation-update")
+	public String updateReservation(@RequestParam("resId") int resId,Model model) {
+
+		Reservation user = reservationService.getReservationForLoggedUserById(resId);
+		user.setStatus("Requested");
+		reservationService.setStatus(user);
 		return "redirect:/your-reservations";
 	}
-	
+
 	// log out
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
-		
-		// handle logout for logged user  
+
+		// handle logout for logged user
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (auth != null) {
 			new SecurityContextLogoutHandler().logout(request, response, auth);

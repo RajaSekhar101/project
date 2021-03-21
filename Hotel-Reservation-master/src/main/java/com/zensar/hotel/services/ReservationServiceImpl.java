@@ -60,6 +60,7 @@ public class ReservationServiceImpl implements ReservationService {
 		reservation.setRooms(currentReservation.getRooms());
 		reservation.setRoom(currentReservation.getRoom());
 		reservation.setId(currentReservation.getId());
+		reservation.setStatus(currentReservation.getStatus());
 
 		reservationRepository.save(reservation);
 	}
@@ -91,4 +92,17 @@ public class ReservationServiceImpl implements ReservationService {
 		
 		reservationRepository.deleteById(resId);
 	}
+
+	@Override
+	public Collection<Reservation> getAllReservations() {
+		return reservationRepository.findAll();
+	}
+
+	@Override
+	public void setStatus(Reservation user) {
+		// TODO Auto-generated method stub
+		reservationRepository.save(user);
+	}
+
+	
 }

@@ -44,15 +44,27 @@
 		</header>
 
 		<!-- Main buttons and title -->
-		<div class="wrapper">
+		<div class="wrapper" th:if="${isUserAdmin}">
 			<ul id="scene" data-invert-x="false" data-invert-y="false" data-scalar-x="7" data-scalar-y="7"
 				data-friction-x="0.1" data-friction-y="0.1" data-origin-x="0.5" data-origin-y="0.5">
-				<li class="layer name" data-depth="0.90">HOTEL RESERVATION</li>
-				<li class="layer title" data-depth="0.50">Book Online Now !</li>
-				<li class="layer btn btn-main" data-depth="0.30"><a th:href="@{/book-room}"
+				<li  class="layer btn btn-main" data-depth="0.30"><a th:href="@{/admin-home}"
+						class="reservation-btn">Admin Home</a> <br> <a th:href="@{/logout}" class="logout-btn">Sign
+						Out</a></li>
+				
+			</ul>
+		</div>
+		<div class="wrapper" th:unless="${isUserAdmin}">
+			<ul id="scene" data-invert-x="false" data-invert-y="false" data-scalar-x="7" data-scalar-y="7"
+				data-friction-x="0.1" data-friction-y="0.1" data-origin-x="0.5" data-origin-y="0.5">
+		
+
+				<li  class="layer name" data-depth="0.90">HOTEL RESERVATION</li>
+				<li  class="layer title" data-depth="0.50">Book Online Now !</li>
+				<li  class="layer btn btn-main" data-depth="0.30"><a th:href="@{/book-room}"
 						class="reservation-btn">Book Room</a> <a th:href="@{/your-reservations}" class="reservations-btn">Your
 						Reservations</a> <br> <a th:href="@{/logout}" class="logout-btn">Sign
 						Out</a></li>
+				
 			</ul>
 		</div>
 	</section>
@@ -71,10 +83,7 @@
 							<h3>Single Room:</h3>
 							<img src="images/rooms/single.jpg">
 
-							<p>
-								Single Room <br> with free breakfast for one person or two
-								start from $500 for night up to $1999.
-							</p>
+							
 
 						</div>
 
@@ -88,10 +97,7 @@
 							<h3>Double Room:</h3>
 							<img src="images/rooms/family.jpg">
 
-							<p>
-								Double Room <br> with free breakfast for three persons or
-								four start from $1000 for night up to $2999.
-							</p>
+							
 
 						</div>
 
@@ -105,10 +111,7 @@
 							<h3>Family Room:</h3>
 							<img src="images/rooms/double.jpg">
 
-							<p>
-								Family Room <br> with free breakfast for four persons or
-								five start from $1300 for night up to $3299.
-							</p>
+							
 						</div>
 
 					</div>
@@ -121,11 +124,7 @@
 							<h3>Honeymoon Suite:</h3>
 							<img src="images/rooms/suite.jpg">
 
-							<p>
-								Honeymoon Suite <br> with breakfast and ready for any
-								surprises and customized equipment and start from $1000 for
-								night up to $4999.
-							</p>
+							
 
 						</div>
 					</div>
